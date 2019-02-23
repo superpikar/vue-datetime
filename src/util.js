@@ -128,3 +128,11 @@ export function weekStart () {
 
   return firstDay === 0 ? 7 : firstDay
 }
+
+export function isSameDate (dateA = '2018-02-04', dateB = '2018-2-4') {
+  const firstDate = new Date(dateA)
+  const secondDate = new Date(dateB)
+  const firstDateString = `${firstDate.getFullYear()}-${firstDate.getMonth() + 1}-${firstDate.getDate()}`
+  const secondDateString = `${secondDate.getFullYear()}-${secondDate.getMonth() + 1}-${secondDate.getDate()}`
+  return firstDateString === secondDateString
+}

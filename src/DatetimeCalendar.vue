@@ -15,7 +15,7 @@
     </div>
     <div class="vdatetime-calendar__month">
       <div class="vdatetime-calendar__month__weekday" v-for="weekday in weekdays">{{ weekday }}</div>
-      <div class="vdatetime-calendar__month__day" v-for="day in days" @click="selectDay(day)" :class="{'vdatetime-calendar__month__day--selected': day.selected, 'vdatetime-calendar__month__day--disabled': day.disabled}">
+      <div class="vdatetime-calendar__month__day" v-for="day in days" @click="selectDay(day)" :class="{'vdatetime-calendar__month__day--selected': day.selected, 'vdatetime-calendar__month__day--disabled': day.disabled, 'vdatetime-calendar__month__day--holiday': day.isHoliday}">
         <span><span>{{ day.number }}</span></span>
       </div>
     </div>
@@ -24,7 +24,7 @@
 
 <script>
 import { DateTime } from 'luxon'
-import { monthDayIsDisabled, monthDays, months, weekdays } from './util'
+import { monthDayIsDisabled, monthDays, months, weekdays, isSameDate } from './util'
 
 export default {
   props: {
@@ -54,6 +54,12 @@ export default {
     weekStart: {
       type: Number,
       default: 1
+    },
+    holidays: {
+      type: Array,
+      default () {
+        return []
+      }
     }
   },
 
@@ -77,6 +83,8 @@ export default {
     },
     days () {
       return monthDays(this.newYear, this.newMonth, this.weekStart).map(day => ({
+        date: `${this.newYear}-${this.newMonth}-${day}`,
+        isHoliday: this.isHoliday(`${this.newYear}-${this.newMonth}-${day}`),
         number: day,
         selected: day && this.year === this.newYear && this.month === this.newMonth && this.day === day,
         disabled: !day || monthDayIsDisabled(this.minDate, this.maxDate, this.newYear, this.newMonth, day)
@@ -85,6 +93,9 @@ export default {
   },
 
   methods: {
+    isHoliday (day) {
+      return this.holidays.filter(v => isSameDate(v.date, day)).length > 0
+    },
     selectDay (day) {
       if (day.disabled) {
         return
@@ -202,6 +213,23 @@ export default {
   &:hover > span > span {
     color: #fff;
     background: #3f51b5;
+  }
+}
+
+.vdatetime-calendar__month__day--holiday {
+  & > span > span,
+  &:hover > span > span {
+    color: #444444;
+    background: #ffd495;
+  }
+}
+
+.vdatetime-calendar__month__day--selected.vdatetime-calendar__month__day--holiday {
+  & > span > span,
+  &:hover > span > span {
+    color: #444444;
+    background: #ffd495;
+    border: 5px solid #3f51b5;
   }
 }
 

@@ -19,7 +19,11 @@ new Vue({
       datetimeEmpty: '',
       minDatetime: LuxonDateTime.local().minus({ month: 1, days: 3 }).toISO(),
       maxDatetime: LuxonDateTime.local().plus({ days: 3 }).toISO(),
-      datetimeTheming: LuxonDateTime.local().toISO()
+      datetimeTheming: LuxonDateTime.local().toISO(),
+      holidays: [
+        { date: '2018-05-14', title: 'Holiday 1' },
+        { date: '2018-05-15', title: 'Holiday 2' }
+      ]
     }
   }
 })

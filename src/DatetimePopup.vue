@@ -28,6 +28,7 @@
           :min-date="minDatetimeUTC"
           :max-date="maxDatetimeUTC"
           :week-start="weekStart"
+          :holidays="holidays"
       ></datetime-calendar>
       <datetime-time-picker
           v-if="step === 'time'"
@@ -122,6 +123,9 @@ export default {
     },
     title: {
       type: String
+    },
+    holidays: {
+      type: Array
     }
   },
 

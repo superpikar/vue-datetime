@@ -32,6 +32,29 @@
     </div>
   </div>
 
+  <h2>Date - holidays</h2>
+
+  <div class="example">
+    <div class="example-inputs">
+      <datetime v-model="date" :holidays="holidays"></datetime>
+
+      <div class="values">
+        <p>
+          <strong>Value:</strong> {{ date }}
+        </p>
+      </div>
+    </div>
+    <div class="example-code">
+      <pre><code>&#x3C;datetime
+v-model=&#x22;date&#x22;
+:holidays=&#x22;[
+  {date: &#x27;2018-05-14&#x27;, title: &#x27;Holiday 1&#x27;},
+  {date: &#x27;2018-05-15&#x27;, title: &#x27;Holiday 2&#x27;}
+]&#x22;
+&#x3E;&#x3C;/datetime&#x3E;</code></pre>
+    </div>
+  </div>
+
   <h2>Datetime</h2>
 
   <div class="example">
