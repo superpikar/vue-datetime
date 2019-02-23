@@ -219,7 +219,7 @@ export default {
 .vdatetime-calendar__month__day--holiday {
   & > span > span,
   &:hover > span > span {
-    color: #444444;
+    color: #444;
     background: #ffd495;
   }
 }
@@ -227,7 +227,7 @@ export default {
 .vdatetime-calendar__month__day--selected.vdatetime-calendar__month__day--holiday {
   & > span > span,
   &:hover > span > span {
-    color: #444444;
+    color: #444;
     background: #ffd495;
     border: 5px solid #3f51b5;
   }
